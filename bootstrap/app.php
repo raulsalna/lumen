@@ -1,6 +1,8 @@
 <?php
 
+use Illuminate\Support\Carbon;
 use Dusterio\LumenPassport\Lumen7Application;
+use Laravel\Lumen\Bootstrap\LoadEnvironmentVariables;
 
 require_once __DIR__.'/../vendor/autoload.php';
 
@@ -8,7 +10,11 @@ require_once __DIR__.'/../vendor/autoload.php';
     dirname(__DIR__)
 ))->bootstrap();
 
+
+
+
 date_default_timezone_set(env('APP_TIMEZONE', 'UTC'));
+
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +30,11 @@ date_default_timezone_set(env('APP_TIMEZONE', 'UTC'));
 $app = new Laravel\Lumen\Application(
     dirname(__DIR__)
 );
+$app = new \Dusterio\LumenPassport\Lumen7Application(
+    dirname(__DIR__)
+);
+
+$app->configure('auth');
 
 $app->withFacades();
 
@@ -97,14 +108,17 @@ $app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
 // Finally register two service providers - original one and Lumen adapter
 $app->register(Laravel\Passport\PassportServiceProvider::class);
 $app->register(Dusterio\LumenPassport\PassportServiceProvider::class);
+\Dusterio\LumenPassport\LumenPassport::routes($app);
+
+
+// Second parameter is the client Id
+\Dusterio\LumenPassport\LumenPassport::tokensExpireIn(Carbon::now()->addHour(1));
 
 // $app->register(App\Providers\AppServiceProvider::class);
 // $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
 
-$app = new \Dusterio\LumenPassport\Lumen7Application(
-    dirname(__DIR__)
-);
+
 
 /*
 |--------------------------------------------------------------------------
