@@ -22,6 +22,8 @@ $router->group(["prefix" => "/v1"], function () use ($router){
         $router->post('/register', 'UserController@createUser');
         $router->get('/list', 'UserController@getlistUser');
         $router->put('/{id}', 'UserController@putUser');
+        $router->delete('/{id}', 'UserController@deleteUser');
+        $router->get('/{id}/restore', 'UserController@restoreUser');
 
     });
 });

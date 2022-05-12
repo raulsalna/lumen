@@ -42,7 +42,11 @@ function delUser(int $id)
   if ($user != null)
     $user->delete();
 }
-function restoreUser(int $id){}
-
+function restoreUser (int $id)
+{
+  $user=$this->model->withTrashed () ->find($id);
+  if ($user != null)
+    $user->restore();
+}
 
 }
