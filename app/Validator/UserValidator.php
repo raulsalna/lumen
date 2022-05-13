@@ -29,7 +29,7 @@ class UserValidator
         "document_number" => "required|unique:users,document_number,".$this->request->id,
         "email" => "required|email|unique:users,email,".$this->request->id,
         "password" => "required",
-        "confirm_password" => "required|same: password",
+        "confirm_password" => "required|same:password",
         "phone" => "required"
       ];
   }

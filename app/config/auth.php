@@ -13,6 +13,7 @@ return [
             'driver' => 'passport',
             'provider' => 'users',
         ],
+
     ],
 
     'providers' => [
